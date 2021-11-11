@@ -77,6 +77,14 @@ export default function App() {
       ) {
         catdog.y = corrdinate.offsetY;
       }
+      if (catdog.x > canvasRef.current.width - 30) {
+        catdog.x = canvasRef.current.width - 30;
+        corrdinate.offsetX = canvasRef.current.width - 30;
+      }
+      if (catdog.y > canvasRef.current.height - 30) {
+        catdog.y = canvasRef.current.height - 30;
+        corrdinate.offsetY = canvasRef.current.height - 30;
+      }
 
       now = performance.now();
       elapsed = now - then;
@@ -90,7 +98,7 @@ export default function App() {
           canvasRef.current.height
         );
 
-        //sleep and normal mode
+        //sleep, normal, mouse is out
         if (
           corrdinate.offsetX === catdog.x &&
           corrdinate.offsetY === catdog.y
@@ -107,6 +115,7 @@ export default function App() {
               timeoutExecuted = true;
             }
           }
+          return;
         }
         //goes to east
         if (corrdinate.offsetX > catdog.x && corrdinate.offsetY === catdog.y)
