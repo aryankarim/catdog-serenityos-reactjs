@@ -42,6 +42,7 @@ export default function App() {
       }, 500);
     }
     debounce(() => {
+      //slight move doesnt cause catdog movement
       if (
         ((Math.abs(catdog.x) - Math.abs(offsetX) > 10 ||
           Math.abs(catdog.x) - Math.abs(offsetX) < -10) &&
