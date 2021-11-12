@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-let catdog = { x: 0, y: 0, speed: 1.2 };
+let catdog = { x: 0, y: 0, speed: 1 };
 let corrdinate = { offsetX: 0, offsetY: 0 };
 let fps, fpsInterval, now, then, elapsed;
 let image1 = true;
@@ -42,8 +42,15 @@ export default function App() {
       }, 500);
     }
     debounce(() => {
-      corrdinate.offsetX = offsetX;
-      corrdinate.offsetY = offsetY;
+      if (
+        ((Math.abs(catdog.x) - Math.abs(offsetX) > 10 ||
+          Math.abs(catdog.x) - Math.abs(offsetX) < -10) &&
+          Math.abs(catdog.y) - Math.abs(offsetY) > 10) ||
+        Math.abs(catdog.y) - Math.abs(offsetY) < -10
+      ) {
+        corrdinate.offsetX = offsetX;
+        corrdinate.offsetY = offsetY;
+      }
     });
   };
 
@@ -55,28 +62,37 @@ export default function App() {
     const update = () => {
       requestAnimationFrame(update);
 
+      //x axis chase
       if (corrdinate.offsetX > catdog.x) {
         catdog.x += catdog.speed;
       } else {
         catdog.x -= catdog.speed;
       }
+
+      //y axis chase
       if (corrdinate.offsetY > catdog.y) {
         catdog.y += catdog.speed;
       } else {
         catdog.y -= catdog.speed;
       }
+
+      //x axis is still
       if (
-        corrdinate.offsetX - catdog.x <= 2 * catdog.speed &&
-        corrdinate.offsetX - catdog.x >= -2 * catdog.speed
+        corrdinate.offsetX - catdog.x <= catdog.speed &&
+        corrdinate.offsetX - catdog.x >= -catdog.speed
       ) {
         catdog.x = corrdinate.offsetX;
       }
+
+      //y axis is sitll
       if (
-        corrdinate.offsetY - catdog.y <= 2 * catdog.speed &&
-        corrdinate.offsetY - catdog.y >= -2 * catdog.speed
+        corrdinate.offsetY - catdog.y <= catdog.speed &&
+        corrdinate.offsetY - catdog.y >= -catdog.speed
       ) {
         catdog.y = corrdinate.offsetY;
       }
+
+      //walls collision
       if (catdog.x > canvasRef.current.width - 30) {
         catdog.x = canvasRef.current.width - 30;
         corrdinate.offsetX = canvasRef.current.width - 30;
