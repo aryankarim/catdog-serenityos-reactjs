@@ -44,14 +44,14 @@ export default function App() {
     debounce(() => {
       //slight move doesnt cause catdog movement
       if (
-        Math.abs(offsetX) - catdog.x > 10 ||
-        Math.abs(offsetX) - catdog.x < -10
+        Math.abs(offsetX) - catdog.x > 20 ||
+        Math.abs(offsetX) - catdog.x < -20
       ) {
         corrdinate.offsetX = offsetX;
       }
       if (
-        Math.abs(offsetY) - catdog.y > 10 ||
-        Math.abs(offsetY) - catdog.y < -10
+        Math.abs(offsetY) - catdog.y > 20 ||
+        Math.abs(offsetY) - catdog.y < -20
       ) {
         corrdinate.offsetY = offsetY;
       }
