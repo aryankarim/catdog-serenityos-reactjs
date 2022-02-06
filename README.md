@@ -1,3 +1,3 @@
 # play the demo
 
-checkout the game on: https://aryanmajeed.github.io/catdog-serenityos-reactjs/
+checkout the game on: http://catdog.pages.dev
