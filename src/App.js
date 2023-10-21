@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-let catdog = { x: 0, y: 0, speed: 1 };
+let catdog = { x: 0, y: 0, speed: 10 };
 let corrdinate = { offsetX: 0, offsetY: 0 };
 let fps, fpsInterval, now, then, elapsed;
 let image1 = true;
