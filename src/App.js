@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 let catdog = { x: 0, y: 0, speed: 1 };
 let corrdinate = { offsetX: 0, offsetY: 0 };
@@ -16,15 +16,15 @@ export default function App() {
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth - 2;
     canvas.height = window.innerHeight - 2;
-    canvas.style.backgroundColor = '#f4f4f4';
+    canvas.style.backgroundColor = "#f4f4f4";
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     ctxRef.current = ctx;
 
     const imageObj = new window.Image();
-    imageObj.src = '/images/catdog.svg';
-    imageObj.addEventListener('load', () => {
+    imageObj.src = "/images/catdog.svg";
+    imageObj.addEventListener("load", () => {
       run(imageObj);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,50 +66,50 @@ export default function App() {
     const update = () => {
       requestAnimationFrame(update);
 
-      //x axis chase
-      if (corrdinate.offsetX > catdog.x) {
-        catdog.x += catdog.speed;
-      } else {
-        catdog.x -= catdog.speed;
-      }
-
-      //y axis chase
-      if (corrdinate.offsetY > catdog.y) {
-        catdog.y += catdog.speed;
-      } else {
-        catdog.y -= catdog.speed;
-      }
-
-      //x axis is still
-      if (
-        corrdinate.offsetX - catdog.x <= catdog.speed &&
-        corrdinate.offsetX - catdog.x >= -catdog.speed
-      ) {
-        catdog.x = corrdinate.offsetX;
-      }
-
-      //y axis is sitll
-      if (
-        corrdinate.offsetY - catdog.y <= catdog.speed &&
-        corrdinate.offsetY - catdog.y >= -catdog.speed
-      ) {
-        catdog.y = corrdinate.offsetY;
-      }
-
-      //walls collision
-      if (catdog.x > canvasRef.current.width - 30) {
-        catdog.x = canvasRef.current.width - 30;
-        corrdinate.offsetX = canvasRef.current.width - 30;
-      }
-      if (catdog.y > canvasRef.current.height - 30) {
-        catdog.y = canvasRef.current.height - 30;
-        corrdinate.offsetY = canvasRef.current.height - 30;
-      }
-
       now = performance.now();
       elapsed = now - then;
       if (elapsed > fpsInterval) {
         then = now - (elapsed % fpsInterval);
+
+        //x axis chase
+        if (corrdinate.offsetX > catdog.x) {
+          catdog.x += catdog.speed;
+        } else {
+          catdog.x -= catdog.speed;
+        }
+
+        //y axis chase
+        if (corrdinate.offsetY > catdog.y) {
+          catdog.y += catdog.speed;
+        } else {
+          catdog.y -= catdog.speed;
+        }
+
+        //x axis is still
+        if (
+          corrdinate.offsetX - catdog.x <= catdog.speed &&
+          corrdinate.offsetX - catdog.x >= -catdog.speed
+        ) {
+          catdog.x = corrdinate.offsetX;
+        }
+
+        //y axis is sitll
+        if (
+          corrdinate.offsetY - catdog.y <= catdog.speed &&
+          corrdinate.offsetY - catdog.y >= -catdog.speed
+        ) {
+          catdog.y = corrdinate.offsetY;
+        }
+
+        //walls collision
+        if (catdog.x > canvasRef.current.width - 30) {
+          catdog.x = canvasRef.current.width - 30;
+          corrdinate.offsetX = canvasRef.current.width - 30;
+        }
+        if (catdog.y > canvasRef.current.height - 30) {
+          catdog.y = canvasRef.current.height - 30;
+          corrdinate.offsetY = canvasRef.current.height - 30;
+        }
 
         ctxRef.current.clearRect(
           0,
